@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User guide — Decision Register for Confluence | SATA studio</title>
+<meta name="description" content="How to record a decision, build the register, export for an audit, and what the app does not do. Decision Register for Confluence, by SATA studio.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="assets/dr.css">
+</head>
+<body>
+
+<header class="masthead wrap">
+  <a class="masthead__mark" href="index.html">SATA studio</a>
+  <nav aria-label="Sections">
+    <ul class="slashnav">
+      <li><a href="index.html">/Decision Register</a></li>
+      <li><a href="guide.html" aria-current="page">/Guide</a></li>
+      <li><a href="privacy-security.html">/Privacy &amp; Security</a></li>
+      <li><a href="mailto:apps@sata-studio.net">/Support</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="hero__kicker">User guide</p>
+      <h1>Two macros,<span class="spread">one register.</span></h1>
+      <p class="hero__lede">Decision Register for Confluence keeps the record of a decision on the page
+        where the decision was actually made — and still gives you one table of all of them.</p>
+      <dl class="hero__meta">
+        <div>
+          <dt>Product</dt>
+          <dd>Confluence Cloud</dd>
+        </div>
+        <div>
+          <dt>Vendor</dt>
+          <dd>SATA studio</dd>
+        </div>
+        <div>
+          <dt>Updated</dt>
+          <dd><time datetime="2026-09-05">2026-09-05</time></dd>
+        </div>
+        <div>
+          <dt>Support</dt>
+          <dd><a href="mailto:apps@sata-studio.net">apps@sata-studio.net</a></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="sheet">
+    <article class="doc">
+      <ul class="contents" aria-label="On this page">
+        <li><a href="#what-you-get">What you get</a></li>
+        <li><a href="#record">Record a decision</a></li>
+        <li><a href="#register">Build the register</a></li>
+        <li><a href="#export">Export for an audit</a></li>
+        <li><a href="#consistency">How it stays consistent</a></li>
+        <li><a href="#permissions">Permissions</a></li>
+        <li><a href="#licensing">Licensing</a></li>
+        <li><a href="#limits">Limits</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#support">Support</a></li>
+      </ul>
+
+      <h2 id="what-you-get">1. What you get</h2>
+      <p>Two macros.</p>
+      <ul>
+        <li><strong>Decision</strong> — one per decision, on the page where the decision was actually made.</li>
+        <li><strong>Decision Register</strong> — one table of every decision you are allowed to see, across
+          pages and spaces.</li>
+      </ul>
+      <p>No admin setup, no configuration screen, no external account.</p>
+
+      <h2 id="record">2. Record a decision</h2>
+      <ol>
+        <li>Edit a page and type <code>/Decision</code>, then choose <strong>Decision</strong>.</li>
+        <li>The configuration panel opens automatically. Fill in the fields below.</li>
+        <li>Publish the page. The decision card renders with the status, ID and reversibility as badges.</li>
+      </ol>
+      <div class="tablewrap">
+        <table>
+          <caption>Fields on the Decision macro</caption>
+          <thead>
+            <tr><th scope="col">Field</th><th scope="col">Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Decision (one sentence)</th><td>The call itself, for example <em>Use PostgreSQL for the billing service</em>. Up to 200 characters.</td></tr>
+            <tr><th scope="row">Status</th><td>Proposed / Decided / Superseded / Rejected.</td></tr>
+            <tr><th scope="row">ID (optional)</th><td>Leave blank and the app generates a stable ID such as <code>DR-7K3Q2A</code>. Type your own ADR number (for example <code>ADR-0042</code>) to keep an existing scheme.</td></tr>
+            <tr><th scope="row">Owner</th><td>The person accountable for the decision.</td></tr>
+            <tr><th scope="row">Decided on</th><td>The date the call was made.</td></tr>
+            <tr><th scope="row">Review by</th><td>When it should be revisited. After this date the register shows the decision as <strong>Review overdue</strong>.</td></tr>
+            <tr><th scope="row">Reversibility</th><td>Optional: Reversible (GO) / Needs safeguard (GUARD) / Irreversible (STOP).</td></tr>
+            <tr><th scope="row">Supersedes</th><td>The ID of the decision this one replaces. The older decision then shows <em>Superseded by …</em> in the register.</td></tr>
+            <tr><th scope="row">Tags</th><td>Comma-separated, up to 10.</td></tr>
+            <tr><th scope="row">Why</th><td>Rationale, alternatives considered, consequences. This is the part your successor needs.</td></tr>
+            <tr><th scope="row">Link</th><td>Optional RFC, pull request or ticket.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>You can put several Decision macros on one page — for example one page per meeting.</p>
+
+      <h2 id="register">3. Build the register</h2>
+      <ol>
+        <li>Create a page — <em>Decisions</em> is a good name.</li>
+        <li>Type <code>/Decision Register</code> and choose <strong>Decision Register</strong>.</li>
+        <li>In the configuration panel choose the <strong>Scope</strong>:
+          <ul>
+            <li><strong>This space</strong> — decisions in the space that contains this page (the usual choice).</li>
+            <li><strong>Specific spaces</strong> — list the space keys, comma-separated, for example <code>ENG, OPS</code>.</li>
+            <li><strong>Every space I can see</strong> — organisation-wide.</li>
+          </ul>
+          Optionally set a <strong>Heading</strong>.
+        </li>
+        <li>Publish.</li>
+      </ol>
+      <p>The table shows ID, decision, status, owner, decided date, review date, reversibility and the
+        source page. Above it: counts per status and the number of overdue reviews. You can filter by
+        status, search by text (ID, title, tag, page), sort by any sortable column, and press
+        <strong>CSV</strong> to open the export.</p>
+
+      <h2 id="export">4. Export for an audit</h2>
+      <p>Press <strong>CSV</strong>. A dialog opens with the CSV text for the rows currently visible
+        (filters included). Select all, copy, and paste into a spreadsheet or a <code>.csv</code> file.</p>
+      <p class="note">In this version the export is a copy dialog rather than a file download.</p>
+
+      <h2 id="consistency">5. How it stays consistent</h2>
+      <p>The page body is the source of truth. When a page containing decisions is <strong>viewed</strong>,
+        the app re-reads the page and refreshes a small index stored on the page itself, so:</p>
+      <ul>
+        <li>A new decision appears in the register shortly after its page has been opened once.</li>
+        <li>Deleting a Decision macro removes it from the register the next time that page is viewed.</li>
+        <li>Nothing is stored outside your Confluence site.</li>
+      </ul>
+      <p>If a decision does not appear in the register: open its page once, then reload the register
+        (indexing can take up to a minute).</p>
+
+      <h2 id="permissions">6. Permissions and privacy</h2>
+      <p>The register searches <strong>with your own permissions</strong>. Decisions on pages you cannot
+        view never appear in your register, and yours never leak into someone else’s. The app sends no
+        data outside your Atlassian cloud site and uses no AI services. See
+        <a href="privacy-security.html">Privacy &amp; Security</a> for details.</p>
+
+      <h2 id="licensing">7. Licensing</h2>
+      <ul>
+        <li>The <strong>Decision Register</strong> view requires an active licence on the site.</li>
+        <li><strong>Decision</strong> records render with or without a licence — if the subscription
+          lapses, your decisions remain readable on their pages.</li>
+        <li>Pricing and free tiers are the ones shown on the app’s Atlassian Marketplace listing, and
+          billing is handled by Atlassian.</li>
+      </ul>
+
+      <h2 id="limits">8. Limits in this version</h2>
+      <div class="tablewrap">
+        <table>
+          <caption>Known limits</caption>
+          <thead>
+            <tr><th scope="col">Limit</th><th scope="col">Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Register size</th><td>The 200 most recently modified pages in scope. The register says so when it truncates; narrow the scope.</td></tr>
+            <tr><th scope="row">CSV</th><td>Copy dialog, not a file download.</td></tr>
+            <tr><th scope="row">Indexing</th><td>A decision is indexed when its page is viewed, not at the moment it is published.</td></tr>
+            <tr><th scope="row">Products</th><td>Confluence Cloud only.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="troubleshooting">9. Troubleshooting</h2>
+      <div class="tablewrap">
+        <table>
+          <caption>Symptoms and fixes</caption>
+          <thead>
+            <tr><th scope="col">Symptom</th><th scope="col">What to do</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">“Decision (not recorded yet)” on the page</th><td>Edit the page, select the macro, open its configuration and fill in at least the decision sentence.</td></tr>
+            <tr><th scope="row">The register is empty</th><td>Open one page that has a Decision macro, then reload the register. Check the scope (This space vs. Specific spaces).</td></tr>
+            <tr><th scope="row">A decision is missing from the register</th><td>You may not have permission to view its page; or the page has not been opened since the decision was added.</td></tr>
+            <tr><th scope="row">“Decision Register is not licensed on this site”</th><td>Ask a site admin to activate the app licence. Existing decision records are unaffected.</td></tr>
+            <tr><th scope="row">“Could not load decisions”</th><td>Reload the page. If it persists, contact <a href="mailto:apps@sata-studio.net">apps@sata-studio.net</a> with the space key and the time it happened.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="support">10. Support</h2>
+      <p>Email <a href="mailto:apps@sata-studio.net">apps@sata-studio.net</a>. Non-critical requests are
+        answered within 5 business days; critical issues (data loss, or a page failing to render) are
+        acknowledged within 24 hours.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="colophon">
+  <div class="wrap">
+    <p>Decision Register for Confluence — a Forge app by SATA studio. Runs entirely inside your Atlassian cloud site.</p>
+    <p><a href="privacy-security.html">Privacy &amp; Security</a> · <a href="mailto:apps@sata-studio.net">apps@sata-studio.net</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+/* Decision Register for Confluence — public docs pages
+   SATA studio / cinematic base (dark stage) + light reading surface.
+   Palette and rules: さたの美意識 §3-2 / §3-4 / §5-5 / §11. */
+
+:root {
+  /* stage (dark) */
+  --ink-black: #0A0C10;
+  --graphite: #14171E;
+  --slate: #1E232C;
+  --hairline: rgba(234, 242, 248, .12);
+  --off-white: #EAF2F8;
+  --muted-silver: #8A93A2;
+  --celestial: #5EC8F0;
+
+  /* reading surface (light) */
+  --mist: #F2F8FD;
+  --pure-white: #FFFFFF;
+  --pale-aqua: #DCEEFA;
+  --azure: #3A93D8;
+  --deep-ink: #1B2A3A;
+  --deep-ink-soft: #55657A;
+  --hairline-ink: rgba(27, 42, 58, .14);
+  --hairline-ink-soft: rgba(27, 42, 58, .10);
+
+  --font-display: Georgia, "Hiragino Mincho ProN", "Yu Mincho", "Times New Roman", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --ease-out: cubic-bezier(.2, .7, .3, 1);
+  --rail: 4.5rem;
+
+  --layer-glow: 0;
+  --layer-content: 1;
+  --layer-masthead: 2;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { overflow-x: clip; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ink-black);
+  color: var(--off-white);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.75;
+  font-variant-numeric: tabular-nums;
+}
+
+a { color: var(--celestial); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { color: var(--off-white); }
+
+:focus-visible {
+  outline: 2px solid var(--celestial);
+  outline-offset: 3px;
+  /* focus ring is never animated */
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: .88em;
+  padding: .08em .34em;
+  background: var(--slate);
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+}
+
+.wrap {
+  width: min(100% - 2.5rem, 60rem);
+  margin-inline: auto;
+}
+
+/* ---------- masthead (minimal, text only) ---------- */
+
+.masthead {
+  position: relative;
+  z-index: var(--layer-masthead);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
+  align-items: baseline;
+  padding: 1.4rem 0 1.1rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.masthead__mark {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  text-decoration: none;
+}
+
+.slashnav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.4rem;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.slashnav a {
+  color: var(--muted-silver);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .18s var(--ease-out);
+}
+
+.slashnav a:hover { color: var(--off-white); }
+.slashnav [aria-current="page"] { color: var(--celestial); }
+
+/* ---------- hero (left weighted, height follows content) ---------- */
+
+.hero {
+  position: relative;
+  padding: 4.5rem 0 3.75rem;
+  isolation: isolate;
+}
+
+.hero__glow {
+  position: absolute;
+  z-index: var(--layer-glow);
+  inset: -35% 30% auto -25%;
+  height: 32rem;
+  background: radial-gradient(closest-side, rgba(94, 200, 240, .20), transparent 78%);
+  filter: blur(6px);
+  animation: drift 22s var(--ease-out) infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); opacity: .75; }
+  to   { transform: translate3d(4rem, 1.5rem, 0) scale(1.12); opacity: 1; }
+}
+
+.hero__inner { position: relative; z-index: var(--layer-content); max-width: 44rem; }
+
+.hero__kicker {
+  margin: 0 0 1.1rem;
+  font-size: .78rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.35rem, 6.4vw, 4.1rem);
+  line-height: 1.08;
+  letter-spacing: -.01em;
+  margin: 0;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.hero h1 .spread { display: block; padding-left: 2.5em; }
+
+.hero__lede {
+  margin: 1.6rem 0 0;
+  max-width: 34rem;
+  color: var(--off-white);
+}
+
+.hero__meta {
+  margin: 2.4rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), max-content));
+  gap: .35rem 3rem;
+  font-size: .82rem;
+  color: var(--muted-silver);
+}
+
+.hero__meta dt {
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: .7rem;
+}
+
+.hero__meta dd { margin: 0 0 .6rem; color: var(--off-white); }
+
+/* ---------- reading surface (light panel on the dark stage) ---------- */
+
+.sheet {
+  position: relative;
+  z-index: var(--layer-content);
+  background: var(--mist);
+  color: var(--deep-ink);
+  border-top: 1px solid var(--hairline);
+  padding: 3.5rem 0 4rem;
+}
+
+.sheet a { color: var(--azure); }
+.sheet a:hover { color: var(--deep-ink); }
+
+.sheet code {
+  background: var(--pale-aqua);
+  border-color: var(--hairline-ink);
+  color: var(--deep-ink);
+}
+
+.doc {
+  width: min(100% - 2.5rem, 64rem);
+  margin-inline: auto;
+}
+
+@media (min-width: 62rem) {
+  /* asymmetric: the text column sits left, the rail keeps the right side open */
+  .doc { padding-right: var(--rail); }
+}
+
+.doc > * { max-width: 44rem; }
+
+.doc h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.55rem, 3.2vw, 2.05rem);
+  line-height: 1.25;
+  margin: 3.25rem 0 .35rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--hairline-ink);
+}
+
+.doc h2:first-of-type { margin-top: 1rem; }
+
+.doc h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: .04em;
+  margin: 2rem 0 .4rem;
+}
+
+.doc p, .doc li { color: var(--deep-ink); }
+.doc p { margin: 1rem 0; }
+.doc ol, .doc ul { margin: 1rem 0; padding-left: 1.35rem; }
+.doc li { margin: .4rem 0; }
+.doc li::marker { color: var(--deep-ink-soft); }
+
+.doc strong { font-weight: 700; }
+
+.note {
+  margin: 1.6rem 0;
+  padding: .1rem 0 .1rem 1.15rem;
+  border-left: 1px solid var(--azure);
+  color: var(--deep-ink-soft);
+  font-size: .94rem;
+}
+
+/* contents: a plain inline index, not a card grid */
+.contents {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.5rem;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  color: var(--deep-ink-soft);
+}
+
+.contents a { text-decoration: none; }
+.contents a:hover { text-decoration: underline; }
+
+/* tables */
+.tablewrap {
+  max-width: 44rem;
+  margin: 1.4rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--hairline-ink);
+  background: var(--pure-white);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .93rem;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  padding: .7rem .9rem 0;
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--deep-ink-soft);
+}
+
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: .62rem .9rem;
+  border-bottom: 1px solid var(--hairline-ink-soft);
+}
+
+thead th {
+  font-size: .76rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--deep-ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+tbody th { font-weight: 600; width: 30%; }
+
+/* ---------- landing list (index page) ---------- */
+
+.stack { list-style: none; margin: 0; padding: 0; }
+
+.stack li { border-top: 1px solid var(--hairline); }
+
+.stack a {
+  display: grid;
+  gap: .2rem 2rem;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 1.5rem 0;
+  text-decoration: none;
+  color: var(--off-white);
+  transition: background-color .2s var(--ease-out);
+}
+
+@media (min-width: 46rem) {
+  .stack a { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); align-items: baseline; }
+}
+
+.stack a:hover { background-color: var(--graphite); }
+
+.stack__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+
+.stack__desc { color: var(--muted-silver); font-size: .95rem; margin: 0; }
+
+/* ---------- footer (one line, closes the page) ---------- */
+
+.colophon {
+  background: var(--ink-black);
+  color: var(--muted-silver);
+  border-top: 1px solid var(--hairline);
+  padding: 2rem 0 2.6rem;
+  font-size: .82rem;
+}
+
+.colophon p { margin: .25rem 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__glow { animation: none; }
+  * { transition-duration: .01ms !important; }
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy &amp; Security — Decision Register for Confluence | SATA studio</title>
+<meta name="description" content="Where your data lives, what leaves your site (nothing), the scopes requested and why, access control, and support commitments for Decision Register for Confluence.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="assets/dr.css">
+</head>
+<body>
+
+<header class="masthead wrap">
+  <a class="masthead__mark" href="index.html">SATA studio</a>
+  <nav aria-label="Sections">
+    <ul class="slashnav">
+      <li><a href="index.html">/Decision Register</a></li>
+      <li><a href="guide.html">/Guide</a></li>
+      <li><a href="privacy-security.html" aria-current="page">/Privacy &amp; Security</a></li>
+      <li><a href="mailto:apps@sata-studio.net">/Support</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="hero__kicker">Privacy &amp; Security</p>
+      <h1>Your decisions<span class="spread">never leave.</span></h1>
+      <p class="hero__lede">Decision Register is a Forge app that runs entirely inside Atlassian’s cloud.
+        The vendor operates no servers, no database and no analytics of its own.</p>
+      <dl class="hero__meta">
+        <div>
+          <dt>App</dt>
+          <dd>Decision Register for Confluence</dd>
+        </div>
+        <div>
+          <dt>Vendor</dt>
+          <dd>SATA studio</dd>
+        </div>
+        <div>
+          <dt>Last updated</dt>
+          <dd><time datetime="2026-09-05">2026-09-05</time></dd>
+        </div>
+        <div>
+          <dt>Contact</dt>
+          <dd><a href="mailto:apps@sata-studio.net">apps@sata-studio.net</a></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="sheet">
+    <article class="doc">
+      <ul class="contents" aria-label="On this page">
+        <li><a href="#where">Where your data lives</a></li>
+        <li><a href="#leaves">What leaves your site</a></li>
+        <li><a href="#scopes">Permissions requested</a></li>
+        <li><a href="#access">Access control</a></li>
+        <li><a href="#licence">Availability and licensing</a></li>
+        <li><a href="#posture">Security posture</a></li>
+        <li><a href="#support">Support and incidents</a></li>
+        <li><a href="#residency">Residency and subprocessors</a></li>
+      </ul>
+
+      <h2 id="where">1. Where your data lives</h2>
+      <p>Decision Register is a <strong>Forge app that runs entirely inside Atlassian’s cloud</strong>
+        (eligible for the “Runs on Atlassian” badge). The vendor operates <strong>no servers, no database
+        and no analytics of its own</strong>.</p>
+      <div class="tablewrap">
+        <table>
+          <caption>Data, storage location, and who can read it</caption>
+          <thead>
+            <tr><th scope="col">Data</th><th scope="col">Where it is stored</th><th scope="col">Who can read it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">The decision itself (title, status, owner, dates, reversibility, supersedes, tags, rationale, link)</th>
+              <td>In the <strong>body of your Confluence page</strong>, as the macro’s own configuration</td>
+              <td>Anyone who can view that page, under your existing Confluence permissions</td>
+            </tr>
+            <tr>
+              <th scope="row">A derived index (<code>satadr</code> content property: decision count, statuses, owners, IDs, earliest review date)</th>
+              <td>As a <strong>Confluence content property on the same page</strong>, inside your own site</td>
+              <td>The app, and anyone who can read the page</td>
+            </tr>
+            <tr>
+              <th scope="row">Anything else</th>
+              <td>—</td>
+              <td>Nothing else is stored. No key-value store, no external storage, no caches outside your site</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Uninstalling the app does not remove your decisions</strong>: they are part of the page
+        body. The derived index becomes inert data on your own pages.</p>
+
+      <h2 id="leaves">2. What leaves your site</h2>
+      <p><strong>Nothing.</strong> The app makes no outbound network requests. It has no
+        <code>external.fetch</code> permission in its manifest, sends no telemetry, uses no third-party
+        analytics, and calls <strong>no LLM, AI or machine-learning service</strong> of any kind. Content
+        is never written to logs.</p>
+
+      <h2 id="scopes">3. Permissions requested, and why</h2>
+      <div class="tablewrap">
+        <table>
+          <caption>Forge scopes in the manifest</caption>
+          <thead>
+            <tr><th scope="col">Scope</th><th scope="col">Why it is needed</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><code>read:page:confluence</code></th><td>Read the page body (ADF) to re-derive which decisions are actually on the page</td></tr>
+            <tr><th scope="row"><code>read:confluence-props</code> / <code>write:confluence-props</code></th><td>Read and write the derived <code>satadr</code> index property on the page</td></tr>
+            <tr><th scope="row"><code>read:confluence-content.summary</code></th><td>Show page titles and links in the register table</td></tr>
+            <tr><th scope="row"><code>search:confluence</code></th><td>Run the CQL search that collects decisions across pages and spaces</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>No scope grants access to spaces, users, Jira, or any product the reader cannot already see.</p>
+
+      <h2 id="access">4. Access control</h2>
+      <p>The Decision Register <strong>searches as the current reader</strong> (<code>asUser</code>). A
+        decision recorded on a page the reader may not view never appears in that reader’s register. The
+        only operation performed with app permissions (<code>asApp</code>) is writing the derived index
+        back onto the page that is being viewed — this never exposes content, and never grants a reader
+        access to anything new.</p>
+
+      <h2 id="licence">5. Availability, licensing and data hostage-taking</h2>
+      <p>Decision records render <strong>with or without an active licence</strong>. If a subscription
+        lapses or a refund is issued, the register view stops aggregating, but every decision remains
+        readable on its page and inside the page’s storage format. The vendor cannot withhold your
+        records.</p>
+
+      <h2 id="posture">6. Security posture</h2>
+      <ul>
+        <li>No vendor-operated infrastructure, so no vendor breach can expose customer content.</li>
+        <li>No secrets, tokens or credentials are stored by the app.</li>
+        <li>Input from macro configuration is length-limited and normalised before use; the register
+          performs no HTML or script evaluation of user content (UI Kit components only).</li>
+        <li>Dependencies: the Atlassian Forge runtime and <code>@forge/*</code> packages only; no
+          third-party runtime services.</li>
+      </ul>
+
+      <h2 id="support">7. Support and incident handling</h2>
+      <div class="tablewrap">
+        <table>
+          <caption>Response commitments</caption>
+          <thead>
+            <tr><th scope="col">Item</th><th scope="col">Commitment</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Support channel</th><td>Email: <a href="mailto:apps@sata-studio.net">apps@sata-studio.net</a></td></tr>
+            <tr><th scope="row">Non-critical requests</th><td>Response within <strong>5 business days</strong></td></tr>
+            <tr><th scope="row">Critical issues (data loss, or a page failing to render)</th><td>Acknowledged within <strong>24 hours</strong></td></tr>
+            <tr><th scope="row">Security reports</th><td>Same address, subject marked <code>SECURITY</code>; acknowledged within 24 hours</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Because the app stores its data inside the customer’s own Confluence pages, the worst failure
+        mode is that a macro stops rendering — the underlying decisions remain in the page and can be
+        read without the app.</p>
+
+      <h2 id="residency">8. Data residency and subprocessors</h2>
+      <p>The app introduces <strong>no subprocessors</strong>. All processing happens within Atlassian’s
+        Forge platform and the customer’s own Confluence site, and therefore follows Atlassian’s own data
+        residency for that site.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="colophon">
+  <div class="wrap">
+    <p>Decision Register for Confluence — a Forge app by SATA studio. Runs entirely inside your Atlassian cloud site.</p>
+    <p><a href="guide.html">User guide</a> · <a href="mailto:apps@sata-studio.net">apps@sata-studio.net</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
