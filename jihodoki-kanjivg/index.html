@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>字ほどき｜加工した KanjiVG データ（CC BY-SA 3.0）</title>
+<style>
+  :root { --bg:#ffffff; --text:#1d1f23; --muted:#5a6270; --line:#d9dce1; --link:#1f5fbf; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#15171b; --text:#e9ecf1; --muted:#a3abb8; --line:#2c3038; --link:#8ab4f8; } }
+  body { margin:0; background:var(--bg); color:var(--text); font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; line-height:1.7; }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { font-size:1.35rem; line-height:1.4; }
+  h2 { font-size:1.1rem; margin-top:2rem; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  a { color:var(--link); word-break:break-all; }
+  code { font-size:0.9em; word-break:break-all; }
+  table { border-collapse:collapse; width:100%; font-size:0.92rem; }
+  th, td { border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top; }
+  .note { color:var(--muted); font-size:0.92rem; }
+  .scroll { overflow-x:auto; }
+</style>
+</head>
+<body>
+<main>
+<h1>字ほどき｜加工した KanjiVG データ（CC BY-SA 3.0）</h1>
+<p>iOS アプリ「字ほどき」（個人開発 さた）に同梱している、漢字の筆画と部品のデータです。KanjiVG を加工して作りました。加工したデータも、元と同じ Creative Commons 表示-継承 3.0（CC BY-SA 3.0）で提供します。</p>
+
+<h2>元のデータ</h2>
+<ul>
+  <li>KanjiVG（Copyright © 2009-2026 Ulrich Apel・<a href="https://kanjivg.tagaini.net">https://kanjivg.tagaini.net</a>）</li>
+  <li>使った版: r20260714（<a href="https://github.com/KanjiVG/kanjivg/releases/tag/r20260714">https://github.com/KanjiVG/kanjivg/releases/tag/r20260714</a> の <code>kanjivg-20260714.xml.gz</code>）</li>
+  <li>ライセンス: CC BY-SA 3.0（<a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a>）</li>
+</ul>
+
+<h2>ファイル</h2>
+<div class="scroll">
+<table>
+  <tr><th>ファイル</th><th>中身</th><th>バイト数</th><th>sha256</th></tr>
+  <tr><td><a href="kanjivg_strokes.json">kanjivg_strokes.json</a></td><td>943 字ぶんの筆画・部品の木の文・答え（下の「加工したこと」）</td><td>1,219,796</td><td>sha256: <code>6c9048b9b183facaf582f58ca02c27921d647df8a63d265e5259c08029e5faaf</code></td></tr>
+  <tr><td><a href="kanjivg_strokes.LICENSE.txt">kanjivg_strokes.LICENSE.txt</a></td><td>表示（作者・作品名・URL・ライセンス）・改変の明示・KanjiVG の元の注記</td><td>1,800</td><td>sha256: <code>68c38a42e49378ffd70dc533264e0462f050773787b485b9791e636cbcd33155</code></td></tr>
+</table>
+</div>
+<p>アプリ「字ほどき」1.0.0 に入っている物と同じファイルです。</p>
+
+<h2>加工したこと</h2>
+<ol>
+  <li><strong>字を選んだ</strong>: KanjiVG の字のうち、アプリの面に使う常用漢字 943 字だけを残しました。</li>
+  <li><strong>形式を変えた</strong>: XML を JSON にしました。字ごとに次の 3 つを持ちます。
+    <ul>
+      <li><code>paths</code>: 筆画の SVG パス（KanjiVG の <code>path</code> の <code>d</code> の文字列を書き順のまま。座標は KanjiVG と同じ 109×109）。</li>
+      <li><code>tree</code>: 部品の木を 1 行の文にした物（例「分 ＝ 八 ＋ 刀」）。KanjiVG の <code>kvg:element</code> から作りました。</li>
+      <li><code>finds</code>: その字の部品として入っている常用漢字と、その筆画の番号（0 から数えた <code>paths</code> の位置）。</li>
+    </ul>
+  </li>
+  <li><strong>筆画をまとめ直した</strong>: 部品が分かれて入っている所（<code>kvg:part</code> が 1・2…）は、筆画をまとめて 1 つの部品にしました。同じ字で筆画の組も同じ物が重なった時は 1 つにしました（同じ字が別の筆画にあれば別に数えます）。</li>
+  <li><strong>部品を選んだ（<code>finds</code>）</strong>: 部品の筆画の数が、その常用漢字の総画と同じ物だけを残しました（形が変わって画数が変わる部品は外しました）。1 画の字（一・乙）は外しました。</li>
+  <li><strong>外した情報</strong>: 筆画の種類（<code>kvg:type</code>）・要素の ID・位置などの属性、筆画の番号の表示位置は入れていません。</li>
+</ol>
+
+<h2>ライセンス</h2>
+<ul>
+  <li><code>kanjivg_strokes.json</code> と <code>kanjivg_strokes.LICENSE.txt</code> は、CC BY-SA 3.0 で提供します（<a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a>）。表示と改変の明示は <code>kanjivg_strokes.LICENSE.txt</code> と JSON の先頭の <code>_license</code> にあります。</li>
+  <li>App Store の使用許諾（EULA）の制限は、KanjiVG に由来するこのデータには及びません。このデータを受け取った人は、CC BY-SA 3.0 の条件の範囲で使えます。</li>
+  <li>KanjiVG とその作者は、アプリ「字ほどき」を推奨・保証するものではありません。</li>
+  <li class="note">このページと README.md は、このデータの説明のための物です。</li>
+</ul>
+
+<h2>連絡先</h2>
+<p>さた（個人開発）: <a href="https://forms.gle/JyDHurfaHYLAtERG6" target="_blank" rel="noopener">お問い合わせフォーム</a></p>
+
+<h2 lang="en">English</h2>
+<div lang="en">
+<p>Kanji stroke and component data bundled with the iOS app "字ほどき" (Jihodoki, independent developer "sata"). It was modified from KanjiVG and is distributed under the same Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0).</p>
+<ul>
+  <li>Original work: KanjiVG (Copyright (c) 2009-2026 Ulrich Apel, <a href="https://kanjivg.tagaini.net">https://kanjivg.tagaini.net</a>), release r20260714, licensed under CC BY-SA 3.0 (<a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a>).</li>
+  <li>Modifications: selected the 943 Joyo kanji used in the app; converted XML to JSON (<code>paths</code> = the SVG path <code>d</code> strings in stroke order, 109x109 coordinates as in KanjiVG; <code>tree</code> = the component tree written as one line, built from <code>kvg:element</code>; <code>finds</code> = Joyo kanji found as components and their stroke indices); merged components split into parts (<code>kvg:part</code>); removed duplicate entries with the same kanji and the same strokes; kept only components whose stroke count equals the stroke count of that Joyo kanji; excluded one-stroke kanji; removed stroke types, IDs, positions and other attributes.</li>
+  <li>Files: <code>kanjivg_strokes.json</code> (1,219,796 bytes, sha256 <code>6c9048b9b183facaf582f58ca02c27921d647df8a63d265e5259c08029e5faaf</code>) and <code>kanjivg_strokes.LICENSE.txt</code> (1,800 bytes, sha256 <code>68c38a42e49378ffd70dc533264e0462f050773787b485b9791e636cbcd33155</code>), the same files as in the app version 1.0.0.</li>
+  <li>The restrictions of the App Store license agreement (EULA) do not apply to this data derived from KanjiVG. Recipients may use it under the terms of CC BY-SA 3.0.</li>
+  <li>KanjiVG and its author do not endorse or warrant the app.</li>
+  <li>Contact: <a href="https://forms.gle/JyDHurfaHYLAtERG6" target="_blank" rel="noopener">https://forms.gle/JyDHurfaHYLAtERG6</a></li>
+</ul>
+</div>
+</main>
+</body>
+</html>

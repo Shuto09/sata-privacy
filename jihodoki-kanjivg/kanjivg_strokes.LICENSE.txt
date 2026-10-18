@@ -1,0 +1,21 @@
+漢字の筆画と部品のデータ: KanjiVG（Copyright © 2009-2026 Ulrich Apel・https://kanjivg.tagaini.net ）。Creative Commons 表示-継承 3.0（CC BY-SA 3.0・https://creativecommons.org/licenses/by-sa/3.0/ ）で提供されています。このファイルは、形式の変換・筆画のまとめ直し・部品の対応づけのために KanjiVG r20260714 を加工した物で、同じ CC BY-SA 3.0 で提供します。KanjiVG とその作者は、このアプリを推奨・保証するものではありません。
+
+Kanji stroke and component data: KanjiVG (Copyright (c) 2009-2026 Ulrich Apel, https://kanjivg.tagaini.net), licensed under Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0, https://creativecommons.org/licenses/by-sa/3.0/). This file was modified from KanjiVG r20260714 (format conversion, regrouping of strokes, mapping of components) and is distributed under the same CC BY-SA 3.0. KanjiVG and its author do not endorse or warrant this app.
+
+--- KanjiVG の元の注記（そのまま） ---
+Copyright (C) 2009-2013 Ulrich Apel.
+This work is distributed under the conditions of the Creative Commons
+Attribution-Share Alike 3.0 Licence. This means you are free:
+* to Share - to copy, distribute and transmit the work
+* to Remix - to adapt the work
+
+Under the following conditions:
+* Attribution. You must attribute the work by stating your use of KanjiVG in
+  your own copyright header and linking to KanjiVG's website
+  (http://kanjivg.tagaini.net)
+* Share Alike. If you alter, transform, or build upon this work, you may
+  distribute the resulting work only under the same or similar license to this
+  one.
+
+See http://creativecommons.org/licenses/by-sa/3.0/ for more details.
+This file was generated on 2026-07-14 from the most recent KanjiVG data.
